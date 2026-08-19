@@ -1,0 +1,18 @@
+[package]
+name = "kvforge-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Command-line client for kvforge"
+
+[[bin]]
+name = "kvforge-cli"
+path = "src/main.rs"
+
+[dependencies]
+kvforge-core = { path = "../core" }
+tokio.workspace = true
+anyhow.workspace = true
+clap.workspace = true

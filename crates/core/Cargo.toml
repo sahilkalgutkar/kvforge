@@ -1,0 +1,12 @@
+[package]
+name = "kvforge-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Storage engine and wire protocol for kvforge"
+
+[dependencies]
+thiserror.workspace = true
+bytes.workspace = true

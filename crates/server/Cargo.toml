@@ -1,0 +1,17 @@
+[package]
+name = "kvforge-server"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "TCP server for kvforge"
+
+[[bin]]
+name = "kvforge-server"
+path = "src/main.rs"
+
+[dependencies]
+kvforge-core = { path = "../core" }
+tokio.workspace = true
+anyhow.workspace = true

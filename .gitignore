@@ -1,0 +1,4 @@
+/target
+Cargo.lock
+*.aof
+.DS_Store
