@@ -17,7 +17,7 @@ impl TestServer {
         let addr = listener.local_addr().unwrap();
         let store = Arc::new(Store::new());
         let handle = tokio::spawn(async move {
-            let _ = kvforge_server::serve(listener, store).await;
+            let _ = kvforge_server::serve(listener, store, None).await;
         });
         TestServer { addr, handle }
     }
