@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+
+      - name: fmt
+        run: cargo fmt --all -- --check
+      - name: clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: build
+        run: cargo build --workspace
+      - name: test
+        run: cargo test --workspace
+
+      - name: install cargo-tarpaulin
+        run: cargo install cargo-tarpaulin --locked
+      - name: coverage
+        run: cargo tarpaulin --workspace --out xml --output-dir coverage
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/cobertura.xml
+          fail_ci_if_error: false

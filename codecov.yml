@@ -1,0 +1,13 @@
+comment:
+  layout: "condensed_header, diff, flags, condensed_files"
+  behavior: default
+  require_changes: false
+
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+    patch:
+      default:
+        target: 80%
