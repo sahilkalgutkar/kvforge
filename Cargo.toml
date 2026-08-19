@@ -13,5 +13,5 @@ repository = "https://github.com/sahilkalgutkar/kvforge"
 tokio = { version = "1", features = ["full"] }
 anyhow = "1"
 thiserror = "1"
-clap = { version = "4", features = ["derive"] }
+clap = { version = "4", features = ["derive", "env"] }
 bytes = "1"
