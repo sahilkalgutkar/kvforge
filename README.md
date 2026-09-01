@@ -99,16 +99,23 @@ Requires the Rust toolchain (`rustup`).
 ```bash
 git clone https://github.com/sahilkalgutkar/kvforge.git
 cd kvforge
-cargo build --release
+cargo install --path crates/server
+cargo install --path crates/cli
 ```
+
+That puts `kvforge-server` and `kvforge-cli` on your `PATH` (via
+`~/.cargo/bin`). If you would rather not install them, `cargo build --release`
+leaves the same two binaries in `./target/release/`, and every command below
+works with that prefix instead.
 
 Run the server, optionally pointing it at a log file for durability:
 
 ```bash
-KVFORGE_ADDR=127.0.0.1:6390 KVFORGE_AOF=kvforge.aof ./target/release/kvforge-server
+KVFORGE_ADDR=127.0.0.1:6390 KVFORGE_AOF=kvforge.aof kvforge-server
 ```
 
-Talk to it with the CLI — one-shot commands:
+The CLI defaults to the same `127.0.0.1:6390`, so with the server on its
+default address nothing needs to be passed to reach it. One-shot commands:
 
 ```bash
 kvforge-cli SET greeting "hello world"
@@ -118,8 +125,8 @@ kvforge-cli GET greeting
 
 ...or an interactive session:
 
-```bash
-kvforge-cli
+```console
+$ kvforge-cli
 kvforge> SET name sahil
 OK
 kvforge> GET name
@@ -132,8 +139,10 @@ kvforge> exit
 Kill the server and restart it against the same `KVFORGE_AOF` path — the
 data comes back:
 
-```bash
+```console
+$ KVFORGE_ADDR=127.0.0.1:6390 KVFORGE_AOF=kvforge.aof kvforge-server
 kvforge-server: replayed 3 command(s) from kvforge.aof
+kvforge-server listening on 127.0.0.1:6390
 ```
 
 ## Repository layout
